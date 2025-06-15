@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="aboutstyle.css">
+    <title>About</title>
+</head>
+<body>
+
+    <header>
+        <h1>Tambayan sa Imus</h1>
+        <p>Your number one tambayan blog for life at CvSU Imus</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="blog.html">Blog</a>
+        <a href="campus-news.html">Campus News</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="#" class="active">About</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <main>
+        <section class="creators-section">
+            <h1 class="creators-title">The Creators of Tambayan Imus</h1>
+            
+            <div class="creators-carousel">
+                <button class="carousel-btn prev" onclick="prevCreator()">‹</button>
+                
+                <div class="carousel-container" id="carousel-container">
+                    <div class="creator-image side" id="creator-left">
+                        <img src="" alt="Creator" id="img-left">
+                    </div>
+                    <div class="creator-image center" id="creator-center">
+                        <img src="" alt="Creator" id="img-center">
+                    </div>
+                    <div class="creator-image side" id="creator-right">
+                        <img src="" alt="Creator" id="img-right">
+                    </div>
+                </div>
+                
+                <button class="carousel-btn next" onclick="nextCreator()">›</button>
+            </div>
+            
+            <div class="creator-name" id="creator-name">
+                Creator Name
+            </div>
+        </section>
+
+        <section class="about-section">
+            <div class="about-content">
+                <h2 class="about-title">About Tambayan Imus</h2>
+                <div class="about-text">
+                    <p>Welcome to Tambayan Imus, your premier destination for community connection and local engagement in the heart of Imus, Cavite. Our platform serves as a digital gathering place where residents, visitors, and local businesses come together to share experiences, discover events, and build meaningful relationships within our vibrant community.</p>
+
+                    <p>Founded with the vision of strengthening community bonds, Tambayan Imus bridges the gap between traditional neighborhood connections and modern digital communication. We believe that every community deserves a space where people can easily connect, share local news, discover upcoming events, and support local businesses and initiatives.</p>
+
+                    <p>Our platform offers a comprehensive suite of features designed to enhance your local experience. From event listings and community announcements to local business directories and neighborhood discussions, we provide the tools necessary for meaningful community engagement. Whether you're a long-time resident looking to stay connected or a newcomer seeking to integrate into the community, Tambayan Imus welcomes you with open arms.</p>
+
+                    <p>At the core of our mission is the belief that strong communities are built through active participation and genuine connections. We strive to create an inclusive environment where diverse voices are heard, local culture is celebrated, and community spirit thrives. Join us in building a stronger, more connected Imus community, one conversation at a time.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2025 Tambayan sa Imus | Made by Lim, Arellano, Biclar, Del Rosario, Ebale, Flores and Grande
+
+    <script>
+        const creators = [
+            { name: "Lim, Josh Patrick", image: "images/lim.jpg" },
+            { name: "Arellano, John Micheal", image: "images/arellano.jpg" },
+            { name: "Biclar, Mac Julian", image: "images/Biclar.jpg" },
+            { name: "Ebale, Jordan", image: "images/ebale.jpg" },
+            { name: "Del Rosario, Shin", image: "images/Shin.jpg" },
+            { name: "Flores, Gian", image: "images/flores.jpg" },
+            { name: "Grande, Raven", image: "images/Grande.jpg" }
+        ];
+
+        let currentIndex = 0;
+        let isAnimating = false;
+
+        function updateCarousel() {
+            const leftIndex = (currentIndex - 1 + creators.length) % creators.length;
+            const rightIndex = (currentIndex + 1) % creators.length;
+
+            document.getElementById('img-left').src = creators[leftIndex].image;
+            document.getElementById('img-center').src = creators[currentIndex].image;
+            document.getElementById('img-right').src = creators[rightIndex].image;
+            document.getElementById('creator-name').textContent = creators[currentIndex].name;
+        }
+
+        function nextCreator() {
+            if (isAnimating) return;
+            isAnimating = true;
+
+            const container = document.getElementById('carousel-container');
+            const leftImg = document.getElementById('img-left');
+            const centerImg = document.getElementById('img-center');
+            const rightImg = document.getElementById('img-right');
+            const nameEl = document.getElementById('creator-name');
+
+            // Smooth name fade out
+            nameEl.style.transition = 'opacity 0.3s ease';
+            nameEl.style.opacity = '0';
+
+            // Start smooth slide animation
+            setTimeout(() => {
+                currentIndex = (currentIndex + 1) % creators.length;
+                
+                // Update content for smoother transition
+                const newLeftIndex = (currentIndex - 1 + creators.length) % creators.length;
+                const newRightIndex = (currentIndex + 1) % creators.length;
+                
+                // Update all images
+                leftImg.src = creators[newLeftIndex].image;
+                centerImg.src = creators[currentIndex].image;
+                rightImg.src = creators[newRightIndex].image;
+
+                // Smooth name fade in
+                setTimeout(() => {
+                    nameEl.textContent = creators[currentIndex].name;
+                    nameEl.style.opacity = '1';
+                }, 200);
+
+                isAnimating = false;
+            }, 200);
+        }
+
+        function prevCreator() {
+            if (isAnimating) return;
+            isAnimating = true;
+
+            const container = document.getElementById('carousel-container');
+            const leftImg = document.getElementById('img-left');
+            const centerImg = document.getElementById('img-center');
+            const rightImg = document.getElementById('img-right');
+            const nameEl = document.getElementById('creator-name');
+
+            // Smooth name fade out
+            nameEl.style.transition = 'opacity 0.3s ease';
+            nameEl.style.opacity = '0';
+
+            // Start smooth slide animation
+            setTimeout(() => {
+                currentIndex = (currentIndex - 1 + creators.length) % creators.length;
+                
+                // Update content for smoother transition
+                const newLeftIndex = (currentIndex - 1 + creators.length) % creators.length;
+                const newRightIndex = (currentIndex + 1) % creators.length;
+                
+                // Update all images
+                leftImg.src = creators[newLeftIndex].image;
+                centerImg.src = creators[currentIndex].image;
+                rightImg.src = creators[newRightIndex].image;
+
+                // Smooth name fade in
+                setTimeout(() => {
+                    nameEl.textContent = creators[currentIndex].name;
+                    nameEl.style.opacity = '1';
+                }, 200);
+
+                isAnimating = false;
+            }, 200);
+        }
+
+        // Initialize carousel
+        updateCarousel();
+
+        // Allow clicking on side images to center them
+        document.getElementById('creator-left').addEventListener('click', prevCreator);
+        document.getElementById('creator-right').addEventListener('click', nextCreator);
+    </script>
+</body>
+</html>
